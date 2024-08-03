@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmployeeFormProject</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing:content-box;
+            background-color: lightblue;
+        }
+        .container{
+            border: 2px solid pink;
+            height: 650px;
+            display: grid;
+            grid-template-columns: 200px auto;
+        }
+        .container>div{
+            border: 2px solid red;
+            padding: 10px;
+        }
+        th,td{
+            border: 2px solid black;
+            padding: 5px;
+            background-color: aqua;
+        }
+        label{
+            background-color: aquamarine;
+            /* font-size: 20px; */
+        }
+        input{
+            background-color: black;
+            color: orange;
+            /* margin: 10px; */
+            
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div> 
+             <form action="">
+            <label for=" employee Name">employee Name :-</label>
+            <input id="Name" type="text" placeholder="employee Name">
+
+            <label for="Email">Email :-</label>
+            <input id="email" type="Email" placeholder="Email">
+
+            <label for="PhoneNumber">PhoneNumber :-</label>
+            <input id="phoneNumber" type="number" placeholder="PhoneNumber">
+
+            <label for="Employee-Id">Employee-Id :-</label>
+            <input id="employeeId" type="text" placeholder="Employee-Id">
+
+            <label for="Department">Department :-</label>
+            <input id="department" type="text" placeholder="EnterYourDepartment">
+
+            <label for="EnterPosition">Position :-</label>
+             <select id="position" name="" id="">
+                <option value="null">null</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="MERNStack Developer">MERNStack Developer</option>
+                <option value="FullStack Developer">FullStack Developer</option>
+             </select>  
+             
+            <label for="Experience">Experience :-</label>
+              <select id="experience" name="" id="">
+                <option value="0">0</option>
+                <!-- <option value="Fresher">Fresher</option> -->
+                <option value="1 ">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+
+              </select>
+
+              <!-- <button onclick ="addvalue()">Submit</button> -->
+               <input type="submit">
+               </form>
+        </div>
+
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>employee Name</th>
+                        <th>Enter Email</th>
+                        <th>PhoneNumber</th>
+                        <th>Employee-Id</th>
+                        <th>Department</th>
+                        <th>Position</th>
+                        <th>Experience</th>
+                        <th>Role</th>
+                        <th>Delete</th>
+                    </tr>
+
+                </thead>
+
+                <tbody >
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>
+<script>
+
+    const myForm = document.querySelector('form')
+    
+    myForm.style.color = 'blue'
+    // console.log(myForm)
+    arr = []
+    myForm.addEventListener('submit',function(ele){
+        ele.preventDefault()
+
+        const eName = document.getElementById('Name').value
+        // console.log(eName)
+
+        const email = document.getElementById('email').value
+        // console.log(email)
+
+        const phoneNumber = document.getElementById('phoneNumber').value
+        // console.log(phoneNumber)
+
+        const femployeeId = document.getElementById('employeeId').value
+        // console.log(femployeeId)
+
+        const fdepartment = document.getElementById('department').value
+        // console.log(fdepartment)
+
+        const fPosition = document.getElementById('position').value
+        // console.log(fPosition)
+
+        const fexperience = document.getElementById('experience').value
+        // console.log(fexperience)
+        
+        
+
+        let data ={
+            Ename:eName,
+            Email:email,
+            phoneNumber:phoneNumber,
+            E_id:femployeeId,
+            Depart:fdepartment,
+            Position:fPosition,
+            experience:fexperience
+        }
+        // console.log(data)
+        arr.push(data)
+        // console.log(arr)
+
+       Display(arr)
+
+    })   
+
+
+function Display(arr){
+         
+         
+       
+       
+        document.querySelector('tbody').innerHTML=" "
+        arr.forEach(function(el){
+
+         let tr = document.createElement('tr')
+
+
+         let name = document.createElement('td')
+          name.innerText = el.Ename
+         //  console.log(name)
+
+         let Gmail = document.createElement('td')
+         Gmail.innerText = el.Email
+         //  console.log(Gmail)
+
+         let pNumber = document.createElement('td')
+         pNumber.innerText =el.phoneNumber
+         //  console.log(pNumber)
+
+         let eId = document.createElement('td')
+         eId.innerText =el.E_id
+         //  console.log(eId)
+
+         let departmt =document.createElement('td')
+         departmt.innerText = el.Depart
+         //  console.log(departmt)
+
+         let position = document.createElement('td')
+         position.innerText =el.Position
+          //  console.log(position)
+
+          let Experience =document.createElement('td')
+         Experience.innerText =el.experience
+          //  console.log(Experience)
+          
+          let Role = document.createElement('td')
+          Role.innerText = role(el.experience)
+
+          let Delete = document.createElement('td')
+          Delete.innerText = 'Delete'
+          Delete.style.backgroundColor='red'
+          Delete.addEventListener('click',function(event){
+            event.target.parentNode.remove();
+          })
+
+    
+          tr.append(name, Gmail,pNumber,eId,departmt,position,Experience,Role,Delete)
+        //   console.log(tr)
+
+        document.querySelector('tbody').append(tr)
+        // console.log(tbody)
+        });
+
+        function role(experience){
+            if(experience > 5){
+                return 'senior'
+            }
+            else if(experience>=2 && experience<5){
+               return 'junior'
+            }
+            else if(experience<=1){
+               return 'fresher'
+              
+               }
+        }
+
+    }
+ </script>
